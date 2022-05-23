@@ -15,7 +15,9 @@ bool MobiHeader::generate(unsigned int text_encoding,
                           unsigned int exth_header_length,
                           unsigned int book_title_length,
                           unsigned int locale,
-                          unsigned short text_records_count) {
+                          unsigned short text_records_count,
+                          unsigned short image_records_count
+                          ) {
     memset(reinterpret_cast<char *>(&mobi_header_), 0, sizeof(mobi_header_));
     
     try {
@@ -25,7 +27,7 @@ bool MobiHeader::generate(unsigned int text_encoding,
         
         Utils::uintToBytes(text_encoding, mobi_header_.text_encoding);
         Utils::uintToBytes(8496792470, mobi_header_.unique_id); // TODO: get correct random id here
-        Utils::uintToBytes(5, mobi_header_.mobi_file_version); // TODO: verify this value
+        Utils::uintToBytes(4, mobi_header_.mobi_file_version); // jsyang: This is required to be readable by the Franklin NID-260 MP Reader
         
         Utils::uintToBytes(0xFFFFFFFF, mobi_header_.orthographic_index, false);
         Utils::uintToBytes(0xFFFFFFFF, mobi_header_.inflection_index, false);
@@ -50,7 +52,7 @@ bool MobiHeader::generate(unsigned int text_encoding,
         
         Utils::uintToBytes(locale, mobi_header_.locale);
         
-        Utils::uintToBytes(6, mobi_header_.minimum_mobipocket_version);
+        Utils::uintToBytes(6, mobi_header_.minimum_mobipocket_version); // jsyang: the NID-260 MP Reader does not respect this value
         
         Utils::uintToBytes(0b1010000, mobi_header_.exth_flags, true);
         
@@ -60,7 +62,7 @@ bool MobiHeader::generate(unsigned int text_encoding,
         Utils::uintToBytes(0xFFFFFFFF, mobi_header_.drm_count, false);
         
         Utils::ushortToBytes(1, mobi_header_.first_content_record_number);
-        Utils::ushortToBytes(text_records_count, mobi_header_.last_content_record_number);  // TODO: verify last content record number
+        Utils::ushortToBytes(text_records_count + image_records_count, mobi_header_.last_content_record_number);  // TODO: verify last content record number
         
         Utils::uintToBytes(0x00000001, mobi_header_.unknown_bytes_2, false);
         

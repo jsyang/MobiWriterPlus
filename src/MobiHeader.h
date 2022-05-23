@@ -70,7 +70,9 @@ public:
                   unsigned int exth_header_length,
                   unsigned int book_title_length,
                   unsigned int locale,
-                  unsigned short text_records_count);
+                  unsigned short text_records_count,
+                  unsigned short image_records_count
+                  );
     
     MobiHeaderStruct mobi_header() const { return mobi_header_; }
     std::string data() const { return data_; }

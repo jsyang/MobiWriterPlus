@@ -23,6 +23,7 @@ public:
     
 private:
     std::vector<std::string> text_records_;
+    std::vector<std::vector<unsigned char> > image_records_;
 };
 
 #endif

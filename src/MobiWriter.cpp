@@ -9,8 +9,12 @@ bool MobiWriter::write(MobiBook *mobi_book, std::string filename) {
     for (size_t i = 0; i < mobi_book->html_content().size(); i += 4096) {
         text_records_.push_back(mobi_book->html_content().substr(i, 4096) + '\0');
     }
+
+    for (int i = 0; i < mobi_book->gif_contents_size(); i++) {
+        image_records_.push_back(mobi_book->gif_contents(i));
+    }
     
-    PalmDatabaseHeader palm_database_header = PalmDatabaseHeader(static_cast<unsigned int>(text_records_.size() + 2));
+    PalmDatabaseHeader palm_database_header = PalmDatabaseHeader(static_cast<unsigned int>(text_records_.size() + image_records_.size() + 2));
     PalmDocHeader palm_doc_header = PalmDocHeader();
     MobiHeader mobi_header = MobiHeader();
     ExthHeader exth_header = ExthHeader();
@@ -35,7 +39,9 @@ bool MobiWriter::write(MobiBook *mobi_book, std::string filename) {
                               exth_header.size(),
                               static_cast<unsigned int>(mobi_book->title().size()),
                               1033,
-                              text_records_.size())) {
+                              text_records_.size(),
+                              image_records_.size()
+                              )) {
         
         std::cout << "error creating the mobi header" << std::endl;
         return false;
@@ -55,6 +61,12 @@ bool MobiWriter::write(MobiBook *mobi_book, std::string filename) {
     
     for (int i = 0; i < text_records_.size(); ++i) {
         records.push_back(text_records_[i]);
+    }
+
+    for (int i = 0; i < image_records_.size(); ++i) {
+        size_t len = image_records_[i].size();
+        std::string imageAsSTDString( image_records_[i].begin(), image_records_[i].end() ) ;
+        records.push_back(imageAsSTDString);
     }
     
     if (!eof_record.generate()) {
