@@ -1,23 +1,12 @@
-MobiWriter
+MobiWriter _Plus!_
 ==========
 
-Minimal writer for the mobipocket format. No images or other fancy stuff like TOC supported.
+Minimal writer for the mobipocket format; images ARE supported (but must be cross-referenced manually). Nothing else is supported.
+Forked from [MobiWriter](https://github.com/cafaxo/MobiWriter). An enhancement 7 years later... great code is timeless; thank you 
+Lukas Mayrhofer!
+#### Usage 
 
-I use this for all my kindle books, because MobiWriter enables me to directly specify the raw html contents of the mobi file. Tools like KindleGen, calibre, etc. add specific formatting nonsense to the html source, that sucks.
-
-#### Usage (requires basic html, no css etc.):
-
-```c++
-#include <iostream>
-#include <fstream>
-#include "MobiWriter.h"
-
-int main(int argc, const char * argv[]) {
-    MobiBook *mobi_book = new MobiBook("Hello Book Title", "Hello Book Author");
-    mobi_book->addHtmlFile("source.html");
-    
-    
-    MobiWriter *mobi_writer = new MobiWriter();
-    mobi_writer->write(mobi_book, "Hello_Book_Title.mobi");
-}
-```
+1. Change the source code within `main.cpp` to include all the files you want to end up in the MOBI file.
+2. `g++ main.cpp`
+3. `chmod +x a.out`
+4. `./a.out`
