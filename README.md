@@ -6,7 +6,8 @@ Forked from [MobiWriter](https://github.com/cafaxo/MobiWriter). An enhancement 7
 Lukas Mayrhofer!
 #### Usage 
 
-1. Change the source code within `main.cpp` to include all the files you want to end up in the MOBI file.
-2. `g++ main.cpp`
-3. `chmod +x a.out`
-4. `./a.out`
+```
+$ make
+
+$ ./MobiWriterPlus input.html output.mobi --title='The Hello World 3rd. Ed' --author='jsyang.ca@gmail.com' 1.gif 2.gif 3.gif
+```
