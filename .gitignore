@@ -4,3 +4,7 @@
 *.gif
 *.mobi
 MobiWriterPlus
+node_modules
+out/**/*
+in/**/*
+yarn-error.log

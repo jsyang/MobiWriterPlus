@@ -11,3 +11,10 @@ $ make
 
 $ ./MobiWriterPlus input.html output.mobi --title='The Hello World 3rd. Ed' --author='jsyang.ca@gmail.com' 1.gif 2.gif 3.gif
 ```
+
+## Pipeline
+
+1. Create HTML content with references to image files in the same directory ex: `<img src="figure13.gif">`
+2. Compile the executable with `make`
+3. Run `yarn make __HTML_FILE__`
+4. Resulting MOBI file should be located in the `out/` directory (along with an intermediate HTML file).
