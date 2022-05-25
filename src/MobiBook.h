@@ -13,6 +13,8 @@
 class MobiBook {
 public:
     MobiBook(std::string title, std::string author);
+    void setTitle(std::string title);
+    void setAuthor(std::string author);
     bool addHtmlFile(std::string filename);
     bool addGifFile(std::string filename);
     

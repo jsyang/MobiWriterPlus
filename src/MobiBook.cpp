@@ -10,6 +10,14 @@ MobiBook::MobiBook(std::string title, std::string author) {
     author_ = author;
 }
 
+void MobiBook::setTitle(std::string title) {
+    title_ = title;
+}
+
+void MobiBook::setAuthor(std::string author) {
+    author_ = author;
+}
+
 bool MobiBook::addHtmlFile(std::string filename) {
     std::ifstream file(filename.c_str(), std::ifstream::in);
     
