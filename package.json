@@ -7,10 +7,12 @@
   "license": "MIT",
   "scripts": {
     "make": "mkdir -p out ; node index.js",
-    "clean": "rm -rf out"
+    "clean": "rm -rf out",
+    "pub": "node publishToNID260.js"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.11",
-    "html-minifier": "^4.0.0"
+    "html-minifier": "^4.0.0",
+    "slugify": "^1.6.5"
   }
 }
