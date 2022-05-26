@@ -41,5 +41,5 @@ execSync(`yarn make source.final.html`);
 const mobiFile = readdirSync('out').find(file => /mobi$/i.test(file));
 const outputFileName = 'test.mobi';
 execSync(`cp out/${mobiFile} out/${outputFileName}`);
-execSync(`mv -f out/${outputFileName} '/Volumes/NO NAME/eBooks/${outputFileName}'`);
+execSync(`mv -f out/${outputFileName} '/Volumes/NO NAME/eNews/${outputFileName}'`);
 console.log('Book published to the Franklin NID-260!');
