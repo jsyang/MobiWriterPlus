@@ -4,6 +4,9 @@ MobiWriter _Plus!_
 Minimal writer for the mobipocket format; images ARE supported (but must be cross-referenced manually). Nothing else is supported.
 Forked from [MobiWriter](https://github.com/cafaxo/MobiWriter). An enhancement 7 years later... great code is timeless; thank you 
 Lukas Mayrhofer!
+
+#### Note: This much of the expanded code specifically targets Mobipocket Reader 5.x (non-Java version) and the Franklin NID-260 device.
+
 #### Usage 
 
 ```
