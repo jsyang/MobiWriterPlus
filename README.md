@@ -5,6 +5,23 @@ Minimal writer for the mobipocket format.
 Forked from [MobiWriter](https://github.com/cafaxo/MobiWriter). An enhancement 7 years later... great code is timeless; thank you 
 Lukas Mayrhofer.
 
+## MOBI format reference
+
+- [US Library of Congress entry on Mobipocket format](https://www.loc.gov/preservation/digital/formats/fdd/fdd000472.shtml)
+    - [Mobipocket Content Development Reference](https://web.archive.org/web/20070416135346/http://www.mobipocket.com/dev/article.asp?BaseFolder=prcgen)
+
+### Cover page example:
+
+```
+<html>
+<body>
+<p align="center"><a onclick="document.goto_page_relative(1)"><img src="pda_cover.gif" hisrc="pc_cover.gif" /></a></p>
+<mbp:pagebreak/>
+Hello world, this is the page after the cover image.
+</body>
+</html>
+```
+
 ## Enhancements
 
 - You can add `.gif` images as arguments to the executable on the CLI

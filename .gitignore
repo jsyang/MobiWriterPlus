@@ -8,3 +8,4 @@ node_modules
 out/**/*
 in/**/*
 yarn-error.log
+tmp/**/*

@@ -3,6 +3,7 @@
 // Sets the MOBI document author from meta tag
 // Minifies the HTML
 
+const path = require('path');
 const [NODE, SCRIPT, SOURCE_HTML] = process.argv;
 const { readFileSync, writeFileSync } = require('fs');
 const { execSync } = require('child_process');
@@ -10,6 +11,7 @@ const cheerio = require('cheerio');
 const minifyHTML = require('html-minifier').minify;
 
 const html = readFileSync(SOURCE_HTML).toString('utf8');
+const SOURCE_DIR = path.dirname(SOURCE_HTML);
 
 const $ = cheerio.load(html);
 const title = $('meta[name="title"]').attr('content');
@@ -50,14 +52,14 @@ const extractHashFromP = p => p.split('="')[1].split('"')[0];
 // from within the viewer for the NID-260; if not offset, there will be parts of the HTML displayed
 const DISPLAY_FILEPOS_OFFSET = 1;
 
-finalHTML.match(/<p id="[a-zA-Z0-9\-]+">/g).forEach(matchedString => {
+finalHTML.match(/<p id="[a-zA-Z0-9\-]+">/g)?.forEach(matchedString => {
     const hash = extractHashFromP(matchedString);
     hashToFilePosMap[hash] = (finalHTML.indexOf(matchedString) + 1).toString().padStart(10, '0');
 });
 
 // Replace the placeholder with the actual file position
 const extractHashFromA = a => a.split('="#')[1].split('"')[0];
-finalHTML.match(/<a href="#[a-zA-Z0-9\-]+" filepos="0000000000">/g).forEach(matchedString => {
+finalHTML.match(/<a href="#[a-zA-Z0-9\-]+" filepos="0000000000">/g)?.forEach(matchedString => {
     const hash = extractHashFromA(matchedString);
     const filePos = hashToFilePosMap[hash];
 
@@ -73,4 +75,4 @@ const finalMOBIFile = `out/${fileDate}.mobi`;
 
 writeFileSync(finalHTMLFile, finalHTML);
 
-execSync(`./MobiWriterPlus ${finalHTMLFile} ${finalMOBIFile} --title='${title}' --author='${author}' ${gifFiles.join(' ')}`);
+execSync(`./MobiWriterPlus ${finalHTMLFile} ${finalMOBIFile} --title='${title}' --author='${author}' ${gifFiles.map(f => path.join(SOURCE_DIR, f)).join(' ')}`);
